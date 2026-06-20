@@ -1,8 +1,8 @@
-<p align="center">
-  <img src="./assets/logo.png" alt="Gua logo" width="180"/>
-</p>
+<h1 href="https://gua.global/about" align="center">Gua</h1>
 
-<h1 align="center">Gua 🐺</h1>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/00897e57-a32e-4cc8-b863-1ee2a091cb02" width="200"  />
+</p>
 
 <p align="center">
   <strong>Comunicação descentralizada, segura e livre</strong><br/>
@@ -15,31 +15,48 @@
   <img alt="Open source" src="https://img.shields.io/badge/open%20source-yes-blue"/>
 </p>
 
+![](https://github.com/user-attachments/assets/565e1084-f0f7-483f-af31-b1ad5b45aaa3)
+
+
+---
+<div align="center">
+    <h3><a href="https://gua.global/about">Learn more about Gua</a></b>
+</div>
+
+<br>
+
+Gua is a **prototype of a private, decentralized, federated messenger** built on the open [Matrix protocol](https://matrix.org). The idea is simple: chatting should feel as easy as in any modern app, phone sign-in, finding your friends, end-to-end encryption, no ads, but in a **descentralized way**, without a single big-tech company owning the whole network.
+
+It works like a normal modern messenger. Behind the scenes, it's something different.
+
 ---
 
-Gua is a **prototype of a private, decentralized, federated messenger** built on the open [Matrix protocol](https://matrix.org). The idea is simple: chatting should feel as easy as in any modern app — phone sign-in, finding your friends, end-to-end encryption, no ads — but **without a single big-tech company owning the whole network**.
-
-It works like a normal messenger. Behind the scenes, it's something different.
-
 <p align="center">
-  <img src="./assets/guara-wolf.webp" alt="Lobo-guará — the maned wolf of Brazil" width="420"/>
+  <img src="./assets/guara-wolf.webp" alt="Lobo-guará — the maned wolf of Brazil - Photographer: Kathrin Mezger https://www.flickr.com/photos/26094756@N04/10542455354/" width="300"/>
 </p>
 
-<p align="center"><em>Named after the <strong>lobo-guará</strong>, the maned wolf of Brazil — an animal that roams long distances, lives in no pack, and answers to no owner. Free, independent, owned by no one.</em></p>
+<p align="center"><em>Named after the <strong>lobo-guará</strong>, the maned wolf of Brazil. An animal that roams long distances, lives in no pack, and answers to no owner</em></p>
 
-## Why Gua exists
+---
 
-Most of our conversations now live inside closed platforms, where one company controls the app, the servers, the rules, the code and your data. That creates dependency and fragility: the platform can change the rules overnight, mine your information to train AI models, block accounts, or shut a service down — and you have little real control.
+<div align="center">
+    <h3>Why Gua exists</h3>
+</div>
 
-Open source alone doesn't fix this. An app can have open code and still run on a **centralized network** where accounts, contact discovery, routing and operation all flow through infrastructure owned by one organization. Better than a closed commercial platform — but still a single center of control.
+Most of our conversations now live inside closed platforms, where one company controls the app, the servers, the rules, the code and your data. That creates dependency and fragility: the platform can change the rules overnight, mine your information to train AI models, block accounts, or shut a service down, and you have little real control.
+
+Open source alone doesn't fix this. An app can have open code and still run on a **centralized network** where accounts, contact discovery, routing and operation all flow through infrastructure owned by one organization (e.g. [Signal](signal.org)). Better than a closed commercial platform, but still a single center of control.
 
 Gua asks a different question: **what if you had a simple, modern-messenger experience — open code, end-to-end encryption — on a network that doesn't need to belong to any single company, foundation or provider?**
 
-The vision is an open foundation for secure communication between people, communities, organizations, universities, local governments and institutions that need **digital sovereignty** — without giving up a simple experience for the everyday user. Gua isn't "one more private app." It's an open, federated, secure network: easy enough that people never have to think about it, and open enough that institutions can take part without handing all control to a central platform.
+The vision is an open foundation for secure communication between people, communities, organizations, universities, local governments and institutions that need **digital sovereignty**, without giving up a simple experience for the everyday user. Gua is an open, federated, secure network: easy enough that people never have to think about it, and open enough that institutions can take part without handing all control to a central platform.
 
-## How the federation works
+<div align="center">
+    <h3>How the federation works
+</h3>
+</div>
 
-Different servers — run by universities, carriers and institutions — take part in the same network. The Gua Resolver verifies which servers are trusted, keeping the network open and safe at once.
+Different servers, run by universities, carriers and institutions, take part in the same network. The Gua Resolver verifies which servers are trusted, keeping the network open and safe at once.
 
 ```mermaid
 graph TB
@@ -79,7 +96,7 @@ graph TB
   style NET fill:#fbfdfb,stroke:#cfe6d6,stroke-width:2px,stroke-dasharray:6 5;
 ```
 
-In a **centralized** app, everyone depends on the same company. In a **federated** network, different servers — each run by a trusted organization, community or institution — take part in the same network, the way email lets accounts on different providers still write to each other, end-to-end encrypted.
+In a **centralized** app, everyone depends on the same backend. In a **federated** network, different servers, each run by a trusted organization, community or institution, take part in the same network, the way email lets accounts on different providers still write to each other, end-to-end encrypted.
 
 Gua does **not** open the network to any unknown server. The goal is a *secure, verifiable federation*, anchored by a component called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver) — the "front door" of the network. Before you log in, the app queries it to find where an account should sign in, and it holds a signed list of trusted servers. It helps answer three questions:
 
@@ -87,32 +104,8 @@ Gua does **not** open the network to any unknown server. The goal is a *secure, 
 2. **Is that server** part of the trusted Gua network?
 3. **Were the rules** that placed the account on that server published in a verifiable way?
 
-The result: decentralization without the mess — independence combined with trust.
+The result: decentralization without complexity, independence combined with trust.
 
-## For people 👤
-
-A simple messenger that respects you by default:
-
-- 📱 **Sign in with your phone number** — no passwords to remember.
-- 🔒 **End-to-end encryption** on your conversations.
-- 🕵️ **Private contact discovery** — find people without exposing your contacts.
-- 🚫 **No ads**, and no big-tech account required.
-- 🧭 **More control over your data** — not sold, mined or exploited.
-
-You never need to understand Matrix or federation to use Gua. It just feels like a clean, modern messenger.
-
-## For institutions & communities 🏛️
-
-Public and organizational communication **without lock-in** to a single commercial platform. A school, university, public institution, NGO, company or community can **operate or join a trusted server**, with:
-
-- Controlled **institutional identity**.
-- Its own **regional / sovereign infrastructure**.
-- **Interoperability** with other trusted participants.
-- Its own **governance, retention and moderation** rules.
-- Control over its own **data and internal policies**.
-- Security **without losing usability**.
-
-Less dependency on closed platforms — more sovereignty over how you communicate.
 
 ## Project / ecosystem
 
@@ -120,39 +113,27 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 
 | Repository | What it is |
 | --- | --- |
-| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The federation "front door" — resolves which trusted server an account belongs to and holds the signed list of trusted servers. |
+| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The federation "front door": resolves which trusted server an account belongs to and holds the signed list of trusted servers. |
 | [**gua-web**](https://github.com/Gua-ra/gua-web) | Web client. |
 | [**gua-ios**](https://github.com/Gua-ra/gua-ios) | iOS client. |
 | [**identity-service**](https://github.com/Gua-ra/identity-service) | Phone-based identity & contact-discovery backend. |
 | [**gua-auth-service**](https://github.com/Gua-ra/gua-auth-service) | Authentication service. |
 | [**gua-idp-web**](https://github.com/Gua-ra/gua-idp-web) | Sign-in / identity web UI. |
 | [**gua-branding**](https://github.com/Gua-ra/gua-branding) | Brand assets. |
-| [**gua-deploy**](https://github.com/Gua-ra/gua-deploy) | Deployment manifests. |
 
 **How it fits together:**
 
-- **Clients** — `gua-web`, `gua-ios` — the apps people use.
-- **Federation & trust** — `gua-resolver` — resolves accounts to servers and verifies which servers are trusted.
-- **Identity & sign-in** — `identity-service`, `gua-auth-service`, `gua-idp-web` — phone-based identity, contact discovery, authentication and the sign-in UI.
-- **Brand & deployment** — `gua-branding`, `gua-deploy`.
-
-## Contributing & following along
-
-Gua is being built in the open. The best ways to take part:
-
-- ⭐ **Star and watch** the repos under [github.com/Gua-ra](https://github.com/Gua-ra) to follow progress.
-- 🐛 **Open issues** on the relevant repo for bugs, ideas or questions.
-- 🔀 **Send pull requests** — improvements to the clients, the resolver, identity and docs are all welcome.
-
-Because Gua is at the prototype stage, interfaces and architecture are still moving. If you're planning a larger contribution, opening an issue first to discuss direction is a good idea.
+- **Clients** — `gua-web`, `gua-ios`:  the apps people use.
+- **Federation & trust**: `gua-resolver`: resolves accounts to servers and verifies which servers are trusted.
+- **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web` — phone-based identity, contact discovery, authentication and the sign-in UI.
+- **Brand & deployment**: `gua-branding`, `gua-deploy`.
 
 ## Status
 
-Gua is still at the **prototype** stage. Features may change, break or be incomplete, and it is **not yet meant to be critical infrastructure**. Personal use is designed to stay **free — no ads, no data selling**.
+Gua is at the **prototype** stage. Features may change, break or be incomplete, and it is **not yet meant to be critical infrastructure**. Personal use is designed to stay **free**.
 
 ## Contact
 
-- **Help, questions, feedback:** [support@gua.global](mailto:support@gua.global)
 - **General contact:** [contact@gua.global](mailto:contact@gua.global)
 
 ---
