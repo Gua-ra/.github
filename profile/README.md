@@ -25,14 +25,14 @@
 
 <br>
 
-Gua is a **prototype of a private, decentralized, federated messenger** built on the open [Matrix protocol](https://matrix.org). The idea is simple: chatting should feel as easy as in any modern app, phone sign-in, finding your friends, end-to-end encryption, no ads, but in a **descentralized way**, without a single big-tech company owning the whole network.
+Gua is a **prototype of a private, decentralized, federated messenger** built on the open [Matrix protocol](https://matrix.org). The idea is simple: chatting should feel as easy as in any modern app, phone sign-in, finding your friends, end-to-end encryption, no ads, but in a **decentralized way**, without a single big-tech company owning the whole network.
 
 It works like a normal modern messenger. Behind the scenes, it's something different.
 
 ---
 
 <p align="center">
-  <img src="./assets/guara-wolf.webp" alt="Lobo-guará — the maned wolf of Brazil - Photographer: Kathrin Mezger https://www.flickr.com/photos/26094756@N04/10542455354/" width="300"/>
+  <img src="./assets/guara-wolf.webp" alt="Lobo-guará, the maned wolf of Brazil - Photographer: Kathrin Mezger https://www.flickr.com/photos/26094756@N04/10542455354/" width="300"/>
 </p>
 
 <p align="center"><em>Named after the <strong>lobo-guará</strong>, the maned wolf of Brazil. An animal that roams long distances, lives in no pack, and answers to no owner</em></p>
@@ -47,7 +47,7 @@ Most of our conversations now live inside closed platforms, where one company co
 
 Open source alone doesn't fix this. An app can have open code and still run on a **centralized network** where accounts, contact discovery, routing and operation all flow through infrastructure owned by one organization (e.g. [Signal](signal.org)). Better than a closed commercial platform, but still a single center of control.
 
-Gua asks a different question: **what if you had a simple, modern-messenger experience — open code, end-to-end encryption — on a network that doesn't need to belong to any single company, foundation or provider?**
+Gua asks a different question: **what if you had a simple, modern-messenger experience, open code, end-to-end encryption, on a network that doesn't need to belong to any single company, foundation or provider?**
 
 The vision is an open foundation for secure communication between people, communities, organizations, universities, local governments and institutions that need **digital sovereignty**, without giving up a simple experience for the everyday user. Gua is an open, federated, secure network: easy enough that people never have to think about it, and open enough that institutions can take part without handing all control to a central platform.
 
@@ -125,7 +125,7 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 
 **How it fits together:**
 
-- **Clients** — `gua-web`, `gua-ios`:  the apps people use.
+- **Clients**: `gua-web`, `gua-ios`:  the apps people use.
 - **Federation & trust**: `gua-resolver`: resolves accounts to servers and verifies which servers are trusted.
 - **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web`: account sign-up, contact discovery, authentication and the sign-in UI, as the prototype runs today. In the target design, each server owns authentication for its own accounts.
 - **Brand & deployment**: `gua-branding`, `gua-deploy`.
