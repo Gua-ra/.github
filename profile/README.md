@@ -62,14 +62,14 @@ Different servers, run by universities, carriers and institutions, take part in 
 graph TB
   subgraph NET["🐺 GUA NETWORK"]
     direction TB
-    R(["🛡️ Gua Resolver<br/>authority"])
+    R(["🛡️ Gua Resolver<br/>verifies and routes"])
     INST(["🏛️ Institutional<br/>City Hall"])
     UNI(["🎓 Public server<br/>University"])
     CAR(["📡 Public server<br/>Carrier"])
 
-    R -. trust .-> INST
-    R -. trust .-> UNI
-    R -. trust .-> CAR
+    R -. verifies .-> INST
+    R -. verifies .-> UNI
+    R -. verifies .-> CAR
 
     INST <--> UNI
     UNI <--> CAR
@@ -98,13 +98,15 @@ graph TB
 
 In a **centralized** app, everyone depends on the same backend. In a **federated** network, different servers, each run by a trusted organization, community or institution, take part in the same network, the way email lets accounts on different providers still write to each other, end-to-end encrypted.
 
-Gua does **not** open the network to any unknown server. The goal is a *secure, verifiable federation*, anchored by a component called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver) — the "front door" of the network. Before you log in, the app queries it to find where an account should sign in, and it holds a signed list of trusted servers. It helps answer three questions:
+Gua does **not** open the network to any unknown server. The goal is a *secure, verifiable federation*. Its "front door" is a component called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver): before you log in, the app queries it to find where an account should sign in, and it holds a signed list of trusted servers. The resolver verifies and serves that list; which servers are trusted is decided by the federation's published rules, not by the resolver itself. It helps answer three questions:
 
 1. **Which server** does this account belong to?
 2. **Is that server** part of the trusted Gua network?
-3. **Were the rules** that placed the account on that server published in a verifiable way?
+3. **Were the rules** that decide where new accounts are created published in a verifiable way?
 
 The result: decentralization without complexity, independence combined with trust.
+
+For the design behind this, with an honest line between what is built today and what is still the target, read the [Gua identity and federation guide](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/gua-identity-and-federation.md).
 
 
 ## Project / ecosystem
@@ -116,7 +118,7 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 | [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The federation "front door": resolves which trusted server an account belongs to and holds the signed list of trusted servers. |
 | [**gua-web**](https://github.com/Gua-ra/gua-web) | Web client. |
 | [**gua-ios**](https://github.com/Gua-ra/gua-ios) | iOS client. |
-| [**identity-service**](https://github.com/Gua-ra/identity-service) | Phone-based identity & contact-discovery backend. |
+| [**identity-service**](https://github.com/Gua-ra/identity-service) | Sign-up, contact discovery and sign-in backend used by the prototype today. |
 | [**gua-auth-service**](https://github.com/Gua-ra/gua-auth-service) | Authentication service. |
 | [**gua-idp-web**](https://github.com/Gua-ra/gua-idp-web) | Sign-in / identity web UI. |
 | [**gua-branding**](https://github.com/Gua-ra/gua-branding) | Brand assets. |
@@ -125,7 +127,7 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 
 - **Clients** — `gua-web`, `gua-ios`:  the apps people use.
 - **Federation & trust**: `gua-resolver`: resolves accounts to servers and verifies which servers are trusted.
-- **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web` — phone-based identity, contact discovery, authentication and the sign-in UI.
+- **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web`: account sign-up, contact discovery, authentication and the sign-in UI, as the prototype runs today. In the target design, each server owns authentication for its own accounts.
 - **Brand & deployment**: `gua-branding`, `gua-deploy`.
 
 ## Status
