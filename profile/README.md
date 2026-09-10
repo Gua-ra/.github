@@ -45,7 +45,7 @@ It works like a normal modern messenger. Behind the scenes, it's something diffe
 
 Most of our conversations now live inside closed platforms, where one company controls the app, the servers, the rules, the code and your data. That creates dependency and fragility: the platform can change the rules overnight, mine your information to train AI models, block accounts, or shut a service down, and you have little real control.
 
-Open source alone doesn't fix this. An app can have open code and still run on a **centralized network** where accounts, contact discovery, routing and operation all flow through infrastructure owned by one organization (e.g. [Signal](signal.org)). Better than a closed commercial platform, but still a single center of control.
+Open source alone doesn't fix this. An app can have open code and still run on a **centralized network** where accounts, contact discovery, routing and operation all flow through infrastructure owned by one organization (e.g. [Signal](https://signal.org)). Better than a closed commercial platform, but still a single center of control.
 
 Gua asks a different question: **what if you had a simple, modern-messenger experience, open code, end-to-end encryption, on a network that doesn't need to belong to any single company, foundation or provider?**
 
