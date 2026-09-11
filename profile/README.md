@@ -100,7 +100,7 @@ In a **centralized** app, everyone depends on the same company's servers. In a *
 
 Gua does **not** let any unknown server join the network. The goal is a secure network where trust can be checked, not assumed.
 
-The network's "front door" is a small service called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver). Before you sign in, the app asks the resolver which server holds your account. The resolver also gives the app the list of trusted servers. It does not choose who is on that list. The network's published rules decide that, and anyone can read them. The resolver does not run the network, and it never signs you in. It helps answer three questions:
+The network's "front door" is a small service called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver). Before you sign in, the app asks the resolver which server holds your account. The resolver also gives the app the list of trusted servers. Today the operator that runs the resolver admits servers to that list, and the signed list it publishes can be read and checked by anyone. The resolver does not run the network, and it never signs you in. It helps answer three questions:
 
 1. **Which server** holds this account?
 2. **Is that server** a trusted member of the Gua network?
