@@ -56,7 +56,7 @@ The vision is an open foundation for secure communication between people, commun
 </h3>
 </div>
 
-Different servers, run by universities, carriers and institutions, take part in the same network. The Gua Resolver verifies which servers are trusted, keeping the network open and safe at once.
+Gua is designed so that different organizations, such as universities, carriers and public institutions, can each run a trusted server on the same network. A small service called the Gua Resolver helps the app find the right server and confirms that it is trusted. That keeps the network open and safe at the same time.
 
 ```mermaid
 graph TB
@@ -96,17 +96,21 @@ graph TB
   style NET fill:#fbfdfb,stroke:#cfe6d6,stroke-width:2px,stroke-dasharray:6 5;
 ```
 
-In a **centralized** app, everyone depends on the same backend. In a **federated** network, different servers, each run by a trusted organization, community or institution, take part in the same network, the way email lets accounts on different providers still write to each other, end-to-end encrypted.
+In a **centralized** app, everyone depends on the same company's servers. In a **federated** network, many servers share one network. Each server is run by a trusted organization, community or institution. It works the way email does: accounts on different providers can still write to each other. In Gua, those conversations are end-to-end encrypted.
 
-Gua does **not** open the network to any unknown server. The goal is a *secure, verifiable federation*. Its "front door" is a component called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver): before you log in, the app queries it to find where an account should sign in, and it holds a signed list of trusted servers. The resolver verifies and serves that list; which servers are trusted is decided by the federation's published rules, not by the resolver itself. It helps answer three questions:
+Gua does **not** let any unknown server join the network. The goal is a secure network where trust can be checked, not assumed.
 
-1. **Which server** does this account belong to?
-2. **Is that server** part of the trusted Gua network?
-3. **Were the rules** that decide where new accounts are created published in a verifiable way?
+The network's "front door" is a small service called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver). Before you sign in, the app asks the resolver which server holds your account. The resolver also gives the app the list of trusted servers. It does not choose who is on that list. The network's published rules decide that, and anyone can read them. The resolver does not run the network, and it never signs you in. It helps answer three questions:
+
+1. **Which server** holds this account?
+2. **Is that server** a trusted member of the Gua network?
+3. **Are the rules** for placing new accounts on servers public, so anyone can check them?
 
 The result: decentralization without complexity, independence combined with trust.
 
-For the design behind this, with an honest line between what is built today and what is still the target, read the [Gua identity and federation guide](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/gua-identity-and-federation.md).
+Today, one operator runs every part of the prototype. The design is built so that this changes. The goal is a network where different organizations each run their own trusted server.
+
+The [Gua identity and federation guide](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/gua-identity-and-federation.md) explains the design behind this. It separates what is built today from what is still the target.
 
 
 ## Project / ecosystem
@@ -115,10 +119,10 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 
 | Repository | What it is |
 | --- | --- |
-| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The federation "front door": resolves which trusted server an account belongs to and holds the signed list of trusted servers. |
+| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The network's "front door": tells the app which trusted server holds an account, and keeps the list of trusted servers. |
 | [**gua-web**](https://github.com/Gua-ra/gua-web) | Web client. |
 | [**gua-ios**](https://github.com/Gua-ra/gua-ios) | iOS client. |
-| [**identity-service**](https://github.com/Gua-ra/identity-service) | Sign-up, contact discovery and sign-in backend used by the prototype today. |
+| [**identity-service**](https://github.com/Gua-ra/identity-service) | The service that handles sign-up, finding contacts and sign-in in the prototype today. |
 | [**gua-auth-service**](https://github.com/Gua-ra/gua-auth-service) | Authentication service. |
 | [**gua-idp-web**](https://github.com/Gua-ra/gua-idp-web) | Sign-in / identity web UI. |
 | [**gua-branding**](https://github.com/Gua-ra/gua-branding) | Brand assets. |
@@ -126,8 +130,8 @@ All of Gua is open source, like the rest of the Matrix ecosystem. Everything liv
 **How it fits together:**
 
 - **Clients**: `gua-web`, `gua-ios`:  the apps people use.
-- **Federation & trust**: `gua-resolver`: resolves accounts to servers and verifies which servers are trusted.
-- **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web`: account sign-up, contact discovery, authentication and the sign-in UI, as the prototype runs today. In the target design, each server owns authentication for its own accounts.
+- **Federation & trust**: `gua-resolver`: points the app to the server that holds an account, and checks which servers are trusted.
+- **Identity & sign-in**: `identity-service`, `gua-auth-service`, `gua-idp-web`: sign-up, finding contacts, sign-in and the sign-in screens. Today, one operator runs all of them for the whole prototype. In the target design, each server signs in its own accounts.
 - **Brand & deployment**: `gua-branding`, `gua-deploy`.
 
 ## Status
