@@ -1,0 +1,150 @@
+# Reusable pull request check. It fails when a commit in the pull request, or the pull request title or
+# description, carries AI attribution:
+#   - an AI author or committer (Claude, Copilot, Codex), which a squash merge turns into a co-author;
+#   - a Co-authored-by, Signed-off-by or similar trailer naming an AI tool, or a Claude-Session line;
+#   - a "Generated with Claude Code" style footer or a Claude session link.
+# Forks pass `upstream`: commits reachable from those upstream branches are inherited and skipped.
+name: No AI attribution
+
+on:
+  workflow_call:
+    inputs:
+      upstream:
+        description: "Forks: upstream owner/name. Commits reachable from its `upstream_branch` are skipped."
+        type: string
+        default: ""
+      upstream_branch:
+        description: "Upstream branch, or several separated by spaces, that holds the inherited history."
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: no-ai-attribution-${{ github.repository }}-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Fetch commit history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          REPO: ${{ github.repository }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          UPSTREAM: ${{ inputs.upstream }}
+          UPSTREAM_BRANCH: ${{ inputs.upstream_branch }}
+        run: |
+          set -euo pipefail
+          case "$EVENT" in
+            pull_request|pull_request_target) ;;
+            *) echo "::error::No AI attribution runs on pull_request events, not $EVENT."; exit 1 ;;
+          esac
+          if ! [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ && "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::The event has no pull request base and head commits."
+            exit 1
+          fi
+          if [ -n "$UPSTREAM" ] && ! [[ "$UPSTREAM" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "::error::upstream must be owner/name, got '$UPSTREAM'."
+            exit 1
+          fi
+          export GIT_TERMINAL_PROMPT=0
+          git init -q "$RUNNER_TEMP/history"
+          cd "$RUNNER_TEMP/history"
+          # Anonymous access is tried first; private repositories fall back to the job token.
+          git config credential.https://github.com.helper ''
+          git config --add credential.https://github.com.helper '!gh auth git-credential'
+          # Commits only (tree:0): the check reads identities and messages, never file contents.
+          fetch() {
+            for attempt in 1 2 3; do
+              git fetch -q --no-tags --filter=tree:0 "$@" && return 0
+              sleep $((attempt * 5))
+            done
+            echo "::error::git fetch $1 failed three times."
+            return 1
+          }
+          fetch "https://github.com/$REPO.git" "+$BASE_SHA:refs/check/base" "+$HEAD_SHA:refs/check/head"
+          if [ -n "$UPSTREAM" ]; then
+            for branch in $UPSTREAM_BRANCH; do
+              fetch "https://github.com/$UPSTREAM.git" "+refs/heads/$branch:refs/upstream/$branch"
+            done
+          fi
+
+      - name: Check commits and pull request text
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          UPSTREAM: ${{ inputs.upstream }}
+        shell: python3 {0}
+        run: |
+          import os, re, subprocess, sys
+
+          AI = re.compile(
+              r"(noreply@anthropic\.com|@anthropic\.com|\bclaude\[bot\]|\bclaude[ -]code\b|^\s*claude\s*$|"
+              r"^\s*claude\s*<|\bclaude\s+(opus|sonnet|haiku|fable)\b|"
+              r"\+copilot@users\.noreply\.github\.com|^\s*copilot\s*$|^\s*copilot\s*<|copilot-swe-agent|"
+              r"github[ -]copilot|copilot@github\.com|"
+              r"chatgpt-codex-connector|\bcodex\[bot\]|@openai\.com|^\s*(chatgpt|codex|openai codex)\s*(<|$))",
+              re.I)
+          TRAILER = re.compile(
+              r"^\s*(co-authored-by|signed-off-by|generated-by|assisted-by|helped-by|reviewed-by|suggested-by|"
+              r"ai-assisted-by)\s*:\s*(?P<val>.*?)\s*$", re.I)
+          SESSION = re.compile(r"^\s*claude-session[\w-]*\s*:", re.I)
+          # Footers are matched at the start of a line so prose that quotes one is not flagged.
+          FOOTER = re.compile(
+              r"^[\s>*_#-]*(\U0001F916\s*)?generated (with|by) \[?(claude( code)?|(github )?copilot|chatgpt|codex)\b"
+              r"|claude\.ai/code/session", re.I)
+
+          def text_hits(text):
+              hits = []
+              for line in (text or "").splitlines():
+                  trailer = TRAILER.match(line)
+                  if SESSION.match(line):
+                      hits.append("Claude-Session line")
+                  elif trailer and AI.search(trailer.group("val")):
+                      who = re.sub(r"\s*<[^>]*>", "", trailer.group("val")).strip()
+                      hits.append(f"{trailer.group(1)} trailer for {who}")
+                  elif FOOTER.search(line):
+                      hits.append(f"generated-with footer: {line.strip()[:100]}")
+              return hits
+
+          def git(*args):
+              out = subprocess.run(["git", *args], check=True, capture_output=True).stdout
+              return out.decode("utf-8", "replace")
+
+          os.chdir(os.path.join(os.environ["RUNNER_TEMP"], "history"))
+          inherited = ["^" + ref for ref in git("for-each-ref", "--format=%(refname)", "refs/upstream/").split()]
+          pr_range = ["refs/check/head", "^refs/check/base"]
+          total = int(git("rev-list", "--count", *pr_range))
+          log = git("log", "-z", "--format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%B", *pr_range, *inherited)
+
+          findings, checked = [], 0
+          for record in filter(None, log.split("\0")):
+              sha, an, ae, cn, ce, body = record.lstrip("\n").split("\x1f", 5)
+              checked += 1
+              subject = body.strip().splitlines()[0][:72] if body.strip() else ""
+              commit = f'commit {sha[:12]} "{subject}"'
+              for role, name, email in (("author", an, ae), ("committer", cn, ce)):
+                  if AI.search(name) or AI.search(email):
+                      findings.append(f"{commit}: {role} is {name}")
+              findings += [f"{commit}: {hit}" for hit in text_hits(body)]
+          findings += [f"pull request title: {hit}" for hit in text_hits(os.environ.get("PR_TITLE"))]
+          findings += [f"pull request description: {hit}" for hit in text_hits(os.environ.get("PR_BODY"))]
+
+          if total > checked:
+              print(f"Skipped {total - checked} commit(s) inherited from {os.environ['UPSTREAM']}.")
+          findings = list(dict.fromkeys(findings))
+          for finding in findings:
+              message = finding.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+              print(f"::error title=AI attribution::{message}")
+          if findings:
+              print(f"Found {len(findings)} AI attribution item(s) in {checked} commit(s) and the pull request text.")
+              print("Rewrite each listed commit without it (git rebase -i <base> and reword it away; for an AI "
+                    "author run git commit --amend --reset-author --no-edit; redo an AI-authored merge yourself), "
+                    "edit any listed pull request text, then push.")
+              sys.exit(1)
+          print(f"No AI attribution in {checked} commit(s) or the pull request text.")
