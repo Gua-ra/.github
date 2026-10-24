@@ -24,7 +24,7 @@
 
 <br>
 
-Gua is a private messenger built on the open [Matrix protocol](https://matrix.org). It works like the messaging apps people already use: sign in with your phone number today, find the friends who are already on it, and chat with end-to-end encryption on by default. Gua is designed as a federation of trusted servers run by different organizations; today one operator runs the prototype.
+Gua is a private messenger built on the open [Matrix protocol](https://matrix.org). It works like the messaging apps people already use: sign in with your phone number and your passkey or PIN, find the friends who are already on it, and chat with end-to-end encryption on by default. The goal is a federation of trusted servers run by different organizations. Today one operator runs the prototype.
 
 Gua is a **prototype in an invite-only beta**. Features may change, break or be incomplete, and it is not yet meant to be critical infrastructure. Personal use is designed to stay free.
 
@@ -34,7 +34,7 @@ Gua is a **prototype in an invite-only beta**. Features may change, break or be 
   <img src="./assets/guara-wolf.webp" alt="Lobo-guará, the maned wolf of Brazil" width="300"/>
 </p>
 
-<p align="center"><em>Named after the <strong>lobo-guará</strong>, the maned wolf of Brazil. An animal that roams long distances, lives in no pack, and answers to no owner.</em><br/><sub>Photo: <a href="https://www.flickr.com/photos/26094756@N04/10542455354/">"maned wolf"</a> by Kathrin Mezger, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></sub></p>
+<p align="center"><em>Named after the <strong>lobo-guará</strong>, the maned wolf of Brazil. An animal that roams long distances and lives in no pack.</em><br/><sub>Photo: <a href="https://www.flickr.com/photos/26094756@N04/10542455354/">"maned wolf"</a> by Kathrin Mezger, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></sub></p>
 
 ---
 
@@ -48,13 +48,13 @@ Open source alone doesn't fix this. An app can have open code and still run on a
 
 Gua aims at a simple, modern-messenger experience, with open code and end-to-end encryption, on a network that does not need to belong to any single company, foundation or provider.
 
-The vision is an open foundation for secure communication between people, communities, organizations, universities, local governments and institutions that need **digital sovereignty**, without giving up a simple experience for the everyday user. Gua is an open, federated, secure network: easy enough that people never have to think about it, and open enough that institutions can take part without handing all control to a central platform.
+The vision is an open foundation for secure communication between people, communities, organizations, universities, local governments and institutions that need **digital sovereignty**, without giving up a simple experience for the everyday user. The goal is an open, federated, secure network: easy enough that people never have to think about it, and open enough that institutions can take part without handing all control to a central platform.
 
 <div align="center">
     <h3>How the federation works</h3>
 </div>
 
-Gua is designed so that different organizations, such as universities, carriers and public institutions, can each run a trusted server on the same network. A small service called the Gua Resolver helps the app find the right server and confirms that it is trusted. That keeps the network open and safe at the same time.
+Gua is designed so that different organizations, such as universities, carriers and public institutions, can each run a trusted server on the same network. A small service called the Gua Resolver tells the app which server to use and publishes the signed list of servers in the network, called the roster.
 
 ```mermaid
 graph TB
@@ -96,9 +96,9 @@ graph TB
 
 In a **centralized** app, everyone depends on the same company's servers. In a **federated** network, many servers share one network. Each server is run by a trusted organization, community or institution. It works the way email does: accounts on different providers can still write to each other. In Gua, those conversations are end-to-end encrypted.
 
-Gua does **not** let any unknown server join the network. The goal is a secure network where trust can be checked, not assumed.
+Today federation is open at the Matrix layer, so a Gua server can also exchange messages with other Matrix servers. Limiting federation to the servers on the roster is a proposal and is not in place yet. The goal is a secure network where trust can be checked, not assumed.
 
-The network's "front door" is a small service called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver). Before you sign in, the app asks the resolver which server holds your account. The resolver also gives the app the list of trusted servers. Today the operator that runs the resolver admits servers to that list, and the signed list it publishes can be read and checked by anyone. The resolver does not run the network, and it never signs you in. It helps answer three questions:
+The network's "front door" is a small service called the [**Gua Resolver**](https://github.com/Gua-ra/gua-resolver). Before you sign in, the app asks the resolver which server holds your account. The resolver also publishes the roster, and the roster decides where new Gua accounts are created. Today the operator that runs the resolver admits servers to the roster, and anyone can read it and check its signatures. The apps do not check those signatures yet. The resolver does not run the network, and it never signs you in. It helps answer three questions:
 
 1. **Which server** holds this account?
 2. **Is that server** a trusted member of the Gua network?
@@ -114,11 +114,11 @@ The public repositories are under [**github.com/Gua-ra**](https://github.com/Gua
 
 | Repository | What it is |
 | --- | --- |
-| [**gua-ios**](https://github.com/Gua-ra/gua-ios) | iOS client. A fork of Element X iOS carrying the Gua product layer: resolver routing, phone sign-in with an account PIN as the second step, private contact discovery. |
+| [**gua-ios**](https://github.com/Gua-ra/gua-ios) | iOS client. A fork of Element X iOS carrying the Gua product layer: resolver routing, phone sign-in with a passkey or account PIN as the second step, contact discovery. |
 | [**gua-android**](https://github.com/Gua-ra/gua-android) | Android client. A fork of Element X Android with the same product layer. |
-| [**gua-web**](https://github.com/Gua-ra/gua-web) | Web client. A fork of Element Web with the same product layer. |
-| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The network's "front door": tells the app which trusted server holds an account, and publishes the signed list of trusted servers. |
-| [**identity-service**](https://github.com/Gua-ra/identity-service) | Sign-up, sign-in, the account PIN and contact discovery for the prototype today. |
+| [**gua-web**](https://github.com/Gua-ra/gua-web) | Web client. A fork of Element Web with resolver routing and phone sign-in. It has no contact discovery, and calls are off. |
+| [**gua-resolver**](https://github.com/Gua-ra/gua-resolver) | The network's "front door": tells the app which server holds an account, and publishes the roster, the signed list of Gua servers that decides where new accounts are created. |
+| [**identity-service**](https://github.com/Gua-ra/identity-service) | Sign-up, sign-in, the account PIN and passkeys, and contact discovery for the prototype today. |
 | [**gua-auth-service**](https://github.com/Gua-ra/gua-auth-service) | The authentication service that runs next to each homeserver. A fork of Matrix Authentication Service. |
 | [**gua-branding**](https://github.com/Gua-ra/gua-branding) | Logos, icons and other brand assets. |
 | [**rust-opa-wasm**](https://github.com/Gua-ra/rust-opa-wasm) | Gua's fork of `matrix-org/rust-opa-wasm` with no code changes. gua-auth-service pins upstream commit `a3b8cb70` (branch `gua/wasmtime-lt-50`). |
@@ -128,12 +128,12 @@ The sign-in web screens, the deployment manifests and the support inbox live in 
 **How it fits together:**
 
 - **Clients**: `gua-ios`, `gua-android`, `gua-web`: the apps people use.
-- **Federation & trust**: `gua-resolver`: points the app to the server that holds an account, and checks which servers are trusted.
+- **Federation & trust**: `gua-resolver`: points the app to the server that holds an account, and publishes the signed roster of Gua servers.
 - **Identity & sign-in**: `identity-service`, `gua-auth-service`: sign-up, finding contacts and sign-in. In the target design, each server signs in its own accounts.
 
 ## Architecture
 
-Start with [Gua identity and federation](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/gua-identity-and-federation.md), a plain-language guide that separates what is built today from the target. The decisions behind it are recorded in [gua-resolver/docs/decisions](https://github.com/Gua-ra/gua-resolver/tree/main/docs/decisions).
+Start with [Gua identity and federation](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/gua-identity-and-federation.md), a plain-language guide that separates what is built today from the target. What is not built yet, and the rules it must keep, is in [planned federation work](https://github.com/Gua-ra/gua-resolver/blob/main/docs/architecture/planned-federation-work.md). The signed formats are in [signed federation objects](https://github.com/Gua-ra/gua-resolver/blob/main/docs/specs/federation-signed-objects.md).
 
 ## Licenses
 
@@ -154,4 +154,4 @@ Bug reports and small, focused pull requests are welcome. See [CONTRIBUTING.md](
 
 ---
 
-<p align="center"><em>Built on the open <a href="https://matrix.org">Matrix protocol</a>. Free, independent, owned by no one. 🐺</em></p>
+<p align="center"><em>Built on the open <a href="https://matrix.org">Matrix protocol</a>. 🐺</em></p>
