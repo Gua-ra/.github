@@ -123,7 +123,7 @@ The public repositories are under [**github.com/Gua-ra**](https://github.com/Gua
 | [**gua-branding**](https://github.com/Gua-ra/gua-branding) | Logos, icons and other brand assets. |
 | [**rust-opa-wasm**](https://github.com/Gua-ra/rust-opa-wasm) | Gua's fork of `matrix-org/rust-opa-wasm` with no code changes. gua-auth-service pins upstream commit `a3b8cb70` (branch `gua/wasmtime-lt-50`). |
 
-The sign-in web screens, the deployment manifests and the support inbox live in private repositories.
+The sign-in pages (`gua-idp-web`) and the node deployment templates (`gua-stack`) are in private repositories while they are prepared for publication. Gua's own production configuration and project administration stay private.
 
 **How it fits together:**
 
@@ -137,7 +137,7 @@ Start with [Gua identity and federation](https://github.com/Gua-ra/gua-resolver/
 
 ## Licenses
 
-The three clients and the authentication service are forks of Element projects and keep upstream's licenses: AGPL-3.0 (`gua-web` also GPL-3.0), with Element's commercial license as an alternative for the upstream code. Gua's modifications are available under AGPL-3.0. `rust-opa-wasm` is Apache-2.0, as upstream. `identity-service`, `gua-resolver` and `gua-branding` have no license yet, so they are public to read but not licensed for reuse.
+Gua's software is open source. `identity-service` and `gua-resolver` are original Gua code under AGPL-3.0-only. The clients and the authentication service are forks of Element projects: upstream code keeps Element's licenses, and Gua's modifications are AGPL-3.0-only. Element's commercial license covers Element's own code, not Gua's modifications. `rust-opa-wasm` is Apache-2.0, as upstream. The brand assets have no license yet. [LICENSING.md](https://github.com/Gua-ra/.github/blob/main/LICENSING.md) has the details and the policy for the Gua name and logo.
 
 ## Security
 
