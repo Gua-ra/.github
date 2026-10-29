@@ -10,7 +10,7 @@ Gua's published software is free and open source. Anyone can use, study, modify,
 | [gua-resolver](https://github.com/Gua-ra/gua-resolver) | AGPL-3.0-only | Original Gua code |
 | [gua-ios](https://github.com/Gua-ra/gua-ios) | AGPL-3.0-only | Fork of Element X iOS |
 | [gua-android](https://github.com/Gua-ra/gua-android) | AGPL-3.0-only | Fork of Element X Android |
-| [gua-web](https://github.com/Gua-ra/gua-web) | AGPL-3.0-only | Fork of Element Web |
+| [gua-web](https://github.com/Gua-ra/gua-web) | AGPL-3.0-only or GPL-3.0-only | Fork of Element Web |
 | [gua-auth-service](https://github.com/Gua-ra/gua-auth-service) | AGPL-3.0-only | Fork of Matrix Authentication Service |
 | [rust-opa-wasm](https://github.com/Gua-ra/rust-opa-wasm) | Apache-2.0, no Gua code changes | Fork of matrix-org/rust-opa-wasm |
 | [gua-branding](https://github.com/Gua-ra/gua-branding) | No license yet | Gua assets, plus third-party material it credits |
@@ -37,7 +37,7 @@ The software licenses do not cover the Gua name, logo or lobo-guará mark. The [
 ## New repositories
 
 - Original network services and clients: AGPL-3.0-only, with the unmodified license text in `LICENSE`.
-- Forks: keep upstream's license files, notices and headers. Add Gua's own files under a license upstream's terms allow, normally upstream's open-source license.
+- Forks: keep upstream's license files, notices and headers. Files Gua writes carry `Copyright <year> Gua` and `SPDX-License-Identifier: AGPL-3.0-only`, or `AGPL-3.0-only OR GPL-3.0-only` in gua-web, matching upstream's open-source options.
 - Documentation-only repositories: CC BY 4.0.
 - Add a short license section to the README and list the repository here.
 - Third-party code, fonts and images keep their own licenses. Record their source and license next to them.

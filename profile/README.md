@@ -137,7 +137,7 @@ Start with [Gua identity and federation](https://github.com/Gua-ra/gua-resolver/
 
 ## Licenses
 
-Gua's software is open source. `identity-service` and `gua-resolver` are original Gua code under AGPL-3.0-only. The clients and the authentication service are forks of Element projects: upstream code keeps Element's licenses, and Gua's modifications are AGPL-3.0-only. Element's commercial license covers Element's own code, not Gua's modifications. `rust-opa-wasm` is Apache-2.0, as upstream. The brand assets have no license yet. [LICENSING.md](https://github.com/Gua-ra/.github/blob/main/LICENSING.md) has the details and the policy for the Gua name and logo.
+Gua's software is open source. `identity-service` and `gua-resolver` are original Gua code under AGPL-3.0-only. The clients and the authentication service are forks of Element projects: upstream code keeps Element's licenses, and Gua's modifications are AGPL-3.0-only, or also GPL-3.0-only in `gua-web`. Element's commercial license covers Element's own code, not Gua's modifications. `rust-opa-wasm` is Apache-2.0, as upstream. The brand assets have no license yet. [LICENSING.md](https://github.com/Gua-ra/.github/blob/main/LICENSING.md) has the details and the policy for the Gua name and logo.
 
 ## Security
 
