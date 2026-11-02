@@ -13,7 +13,7 @@ Gua's published software is free and open source. Anyone can use, study, modify,
 | [gua-web](https://github.com/Gua-ra/gua-web) | AGPL-3.0-only or GPL-3.0-only | Fork of Element Web |
 | [gua-auth-service](https://github.com/Gua-ra/gua-auth-service) | AGPL-3.0-only | Fork of Matrix Authentication Service |
 | [rust-opa-wasm](https://github.com/Gua-ra/rust-opa-wasm) | Apache-2.0, no Gua code changes | Fork of matrix-org/rust-opa-wasm |
-| [gua-branding](https://github.com/Gua-ra/gua-branding) | No license yet | Gua assets, plus third-party material it credits |
+| [gua-branding](https://github.com/Gua-ra/gua-branding) | CC BY 4.0 | Gua assets, plus third-party material it credits |
 | [.github](https://github.com/Gua-ra/.github) | CC BY 4.0, except `profile/assets` | Organization documentation |
 
 The sign-in pages (`gua-idp-web`) and the node deployment templates (`gua-stack`) are original Gua code licensed under AGPL-3.0-only. Both repositories are private while they are prepared for publication. Gua's own production configuration and project administration tools stay private; running a Gua node does not depend on them.
