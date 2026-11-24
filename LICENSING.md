@@ -14,21 +14,23 @@ Gua's published software is free and open source. Anyone can use, study, modify,
 | [gua-auth-service](https://github.com/Gua-ra/gua-auth-service) | AGPL-3.0-only | Fork of Matrix Authentication Service |
 | [rust-opa-wasm](https://github.com/Gua-ra/rust-opa-wasm) | Apache-2.0, no Gua code changes | Fork of matrix-org/rust-opa-wasm |
 | [gua-branding](https://github.com/Gua-ra/gua-branding) | CC BY 4.0 | Gua assets, plus third-party material it credits |
-| [.github](https://github.com/Gua-ra/.github) | CC BY 4.0, except `profile/assets` | Organization documentation |
+| [.github](https://github.com/Gua-ra/.github) | CC BY 4.0 for documentation, AGPL-3.0-only for workflows, except `profile/assets` | Organization documentation and shared workflows |
 
 The sign-in pages (`gua-idp-web`) and the node deployment templates (`gua-stack`) are original Gua code licensed under AGPL-3.0-only. Both repositories are private while they are prepared for publication. Gua's own production configuration and project administration tools stay private; running a Gua node does not depend on them.
 
-In this repository, `profile/assets/guara-wolf.webp` is a photo by Kathrin Mezger under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), and `profile/assets/logo.png` is the Gua logo, covered by the name and logo policy below.
+In this repository, `profile/assets/guara-wolf.webp` is a photo by Kathrin Mezger under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), and `profile/assets/logo.png` is the Gua logo, published under CC BY 4.0 in gua-branding. The name and logo policy below applies to its use as a mark.
 
 ## Upstream code
 
-The four Element forks keep upstream's license files, copyright notices and terms. Upstream code stays available under the licenses Element grants for it, which for Element Web include GPL-3.0. Element also offers its code under a commercial license (`LICENSE-COMMERCIAL`). That option comes from Element and covers only code Element holds the copyright to. It does not cover Gua's modifications, and Gua does not grant or administer Element's commercial license.
+The four Element forks keep upstream's license files, copyright notices and SPDX lines. Upstream code in Element X iOS, Element X Android and the Matrix Authentication Service is `AGPL-3.0-only OR LicenseRef-Element-Commercial`, and in Element Web `AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial`.
+
+The commercial option (`LICENSE-COMMERCIAL`) is Element's. It covers Element's code, not Gua's changes, and Gua neither grants nor administers it. A file Gua derived from an upstream template keeps upstream's notice and SPDX line, and the commercial option still does not extend to Gua's changes in it.
 
 `rust-opa-wasm` keeps upstream's Apache-2.0 license and notices.
 
 ## Copyright
 
-Copyright in Gua's code stays with the people who wrote it. There is no contributor license agreement and no copyright assignment. A contribution is licensed under the license of the repository it goes into.
+`Copyright <year> Gua` in a file header names the project. Copyright in Gua's code stays with the people who wrote it. There is no contributor license agreement and no copyright assignment. A contribution is licensed under the license of the repository it goes into.
 
 ## Name and logo
 
