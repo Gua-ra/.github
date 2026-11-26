@@ -19,4 +19,4 @@ Gua is a prototype in an invite-only beta. Bug reports from testers and small, f
 
 ## Licenses
 
-There is no contributor license agreement. `identity-service`, `gua-resolver` and `gua-branding` have no license yet, so open an issue before sending code there. Each Element fork's `CONTRIBUTING.md` gives its copyright header rule.
+A contribution is licensed under the license of the repository it goes into, as listed in [LICENSING.md](LICENSING.md). You keep the copyright in your work. There is no contributor license agreement and no copyright assignment. Each Element fork's `CONTRIBUTING.md` gives its copyright header rule. Third-party code or assets need their source and license recorded next to them.

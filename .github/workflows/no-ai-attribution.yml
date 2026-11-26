@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 # Reusable pull request check. It fails when a commit in the pull request, or the pull request title or
 # description, carries AI attribution:
 #   - an AI author or committer (Claude, Copilot, Codex), which a squash merge turns into a co-author;
